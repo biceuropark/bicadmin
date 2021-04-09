@@ -35,6 +35,9 @@ public class LoginActivity extends AppCompatActivity {
         btn_login = findViewById(R.id.lg_login);
         btn_exit = findViewById(R.id.lg_salir);
 
+        editusu.setText("admin@bic.es");
+        editpass.setText("informatica2021");
+
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

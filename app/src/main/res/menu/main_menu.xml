@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/item_empresa"
+        android:icon="@drawable/ic_emp"
+        android:title="Empresas" />
+
+    <item android:id="@+id/item_aparca"
+        android:icon="@drawable/ic_coche"
+        android:title="Aparcamientos" />
+
+    <item android:id="@+id/item_des"
+        android:icon="@drawable/ic_salir"
+        android:title="Desconectar" />
+
+</menu>
