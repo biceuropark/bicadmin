@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">bicpark</string>
+
+    <!--Botones login-->
+    <string name="btnlogin">LOGIN</string>
+    <string name="btnsalir">SALIR</string>
 </resources>
