@@ -2,7 +2,7 @@ package com.example.bicpark.model;
 
 import java.io.Serializable;
 
-public class plaza implements Serializable {
+public class Plaza implements Serializable {
 
     private Integer numero;
     private String estado;

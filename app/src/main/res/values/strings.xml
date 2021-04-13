@@ -5,43 +5,15 @@
     <string name="btnlogin">LOGIN</string>
     <string name="btnsalir">SALIR</string>
 
-    <!--Listado empresas-->
-    <string-array name="empresas">
-        <item>Aeorum</item>
-        <item>Ambergreen</item>
-        <item>AMG</item>
-        <item>Atyges</item>
-        <item>Avias</item>
-        <item>BIC</item>
-        <item>BnTIC</item>
-        <item>Cafeteria</item>
-        <item>CEAE</item>
-        <item>Christar</item>
-        <item>Coaching Airlines</item>
-        <item>Desafío psicotécnicos</item>
-        <item>DHV</item>
-        <item>Dobcomed</item>
-        <item>Electrogym</item>
-        <item>Eolia</item>
-        <item>Excuela Exce</item>
-        <item>Garaje de ideas</item>
-        <item>Golbal Serv.Disca.</item>
-        <item>Inword</item>
-        <item>Jumar Ingeniería</item>
-        <item>Macrimasa</item>
-        <item>Maia Cons.</item>
-        <item>Megger</item>
-        <item>Montajes MOYA</item>
-        <item>Nunsys</item>
-        <item>ON-OFF</item>
-        <item>Proinnovación</item>
-        <item>Rentfy</item>
-        <item>Solbyte</item>
-        <item>T2Client</item>
-        <item>Tricom</item>
-        <item>V2 Link</item>
-        <item>Vinnova</item>
-        <item>Voiceworks</item>
-        <item>3D Zings</item>
+    <!--Estado plaza-->
+    <string-array name="estado">
+        <item name="libre">Libre</item>
+        <item name="Nula">Nula</item>
+        <item name="Alquilada">Alquilada</item>
+    </string-array>
+    <!--Tipo de plaza-->
+    <string-array name="tipo">
+        <item name="Techada">Techada</item>
+        <item name="Exterior">Exterior</item>
     </string-array>
 </resources>

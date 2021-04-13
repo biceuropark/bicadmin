@@ -6,12 +6,13 @@ import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -86,4 +87,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }).show();
     }
+
 }
