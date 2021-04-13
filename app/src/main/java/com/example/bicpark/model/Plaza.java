@@ -4,12 +4,20 @@ import java.io.Serializable;
 
 public class Plaza implements Serializable {
 
+    private String uid;
     private Integer numero;
     private String estado;
     private String empresa;
     private String persona;
     private String tipo;
 
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
     public Integer getNumero() {
         return numero;
     }

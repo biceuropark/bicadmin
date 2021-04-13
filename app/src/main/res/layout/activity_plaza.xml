@@ -34,7 +34,7 @@
         android:layout_height="match_parent"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="200dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
@@ -85,15 +85,16 @@
                 android:layout_marginTop="15dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/pl_persona"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Numero" />
+                    android:hint="Nombre" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                 android:id="@+id/pl_empresa"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp" />
 
@@ -101,7 +102,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="25dp"
                 android:gravity="center|center_horizontal"
                 android:orientation="horizontal">
 
@@ -114,7 +115,7 @@
                         android:id="@+id/pl_save"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Save"
+                        android:text="Guardar"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -123,7 +124,7 @@
                         android:id="@+id/pl_cancel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cancel"
+                        android:text="Cancelar"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

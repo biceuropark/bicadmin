@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class Empresa {
@@ -25,5 +26,11 @@ public class Empresa {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return nombre;
     }
 }

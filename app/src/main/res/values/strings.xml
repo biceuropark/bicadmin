@@ -13,7 +13,7 @@
     </string-array>
     <!--Tipo de plaza-->
     <string-array name="tipo">
-        <item name="Techada">Techada</item>
         <item name="Exterior">Exterior</item>
+        <item name="Techada">Techada</item>
     </string-array>
 </resources>
