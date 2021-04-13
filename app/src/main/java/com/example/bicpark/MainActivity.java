@@ -3,6 +3,7 @@ package com.example.bicpark;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
@@ -13,14 +14,30 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.bicpark.model.Plaza;
+import com.example.bicpark.recycler.AdapterPlaza;
+import com.example.bicpark.recycler.OnPlazaClickListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth fbAuth;
+    private FirebaseDatabase fDatabase;
+    private DatabaseReference databaseReference;
 
     private RecyclerView recyclerView;
+    private AdapterPlaza adapterPlaza;
+    private List<Plaza> plazas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +45,45 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         fbAuth = FirebaseAuth.getInstance();
+        fDatabase = FirebaseDatabase.getInstance();
+        databaseReference = fDatabase.getReference();
+
+
         recyclerView = findViewById(R.id.main_recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        plazas = new ArrayList<>();
+        cargardatos();
+
+        adapterPlaza = new AdapterPlaza(plazas, new OnPlazaClickListener() {
+            @Override
+            public void OnClick(Plaza p) {
+
+            }
+        });
+        recyclerView.setAdapter(adapterPlaza);
 
     }
+
+    private void cargardatos(){
+        databaseReference.child("Plazas").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                plazas.clear();
+                for(DataSnapshot ds:snapshot.getChildren()){
+                    Plaza plaza = ds.getValue(Plaza.class);
+                    plazas.add(plaza);
+                }
+                adapterPlaza.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
 
     @SuppressLint("RestrictedApi")
     @Override

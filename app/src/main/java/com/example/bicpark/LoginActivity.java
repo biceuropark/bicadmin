@@ -56,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
-                            Snackbar.make(view, "Bienvenido!", Snackbar.LENGTH_LONG).show();
                             finish();
                         }else{
                             Snackbar.make(view, "Error en el acceso, revisa los campos", Snackbar.LENGTH_LONG).show();
