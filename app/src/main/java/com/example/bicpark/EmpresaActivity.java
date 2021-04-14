@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.bicpark.model.Empresa;
 import com.example.bicpark.recycler.AdapterEmpresa;
@@ -91,10 +92,26 @@ public class EmpresaActivity extends AppCompatActivity {
                 Empresa m = new Empresa();
                 m.setNombre(nombre);
                 m.setUid(uid);
-                empresaList.add(m);
-                empresasDatabase.child("Empresas").child(m.getUid()).setValue(m);
-                adapterEmpresa.notifyDataSetChanged();
-                limpiar();
+                MaterialAlertDialogBuilder Dialog = new MaterialAlertDialogBuilder(EmpresaActivity.this);
+                Dialog.setTitle("Crear Empresa");
+                Dialog.setMessage("¿Quieres crear la empresa "+m.getNombre()+"?");
+                Dialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        empresaList.add(m);
+                        empresasDatabase.child("Empresas").child(m.getUid()).setValue(m);
+                        adapterEmpresa.notifyDataSetChanged();
+                        Toast.makeText(EmpresaActivity.this, "Empresa "+m.getNombre()+" creada", Toast.LENGTH_LONG).show();
+                        limpiar();
+                    }
+                });
+                Dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                }).show();
+
             }
         });
 
@@ -120,5 +137,10 @@ public class EmpresaActivity extends AppCompatActivity {
     }
     private void limpiar(){
         editempresa.setText("");
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

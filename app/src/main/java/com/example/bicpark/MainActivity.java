@@ -57,7 +57,10 @@ public class MainActivity extends AppCompatActivity {
         adapterPlaza = new AdapterPlaza(plazas, new OnPlazaClickListener() {
             @Override
             public void OnClick(Plaza p) {
-
+                Intent intent = new Intent(MainActivity.this, InfoActivity.class);
+                intent.putExtra("explaza", p);
+                setResult(RESULT_OK, intent);
+                startActivity(intent);
             }
         });
         recyclerView.setAdapter(adapterPlaza);

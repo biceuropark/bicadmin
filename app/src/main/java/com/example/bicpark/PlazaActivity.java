@@ -70,14 +70,16 @@ public class PlazaActivity extends AppCompatActivity {
                 String empresa = sp_empresa.getSelectedItem().toString().trim();
                 String uid = UUID.randomUUID().toString();
 
-                if(numero.isEmpty() || persona.isEmpty()|| estado.isEmpty() || tipo.isEmpty()){
+                if(numero.isEmpty()){
                     Snackbar.make(view, "Completa los campos", Snackbar.LENGTH_LONG).show();
                     return;
                 }
 
                 Plaza plaza = new Plaza();
                 plaza.setNumero(Integer.parseInt(numero));
-                plaza.setPersona(persona);
+                if(!persona.isEmpty()){
+                    plaza.setPersona(persona);
+                }
                 plaza.setEstado(estado);
                 plaza.setTipo(tipo);
                 plaza.setEmpresa(empresa);
