@@ -1,28 +1,22 @@
 package com.example.bicpark;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ExpandableListView;
-import android.widget.Toast;
 
 import com.example.bicpark.model.Empresa;
 import com.example.bicpark.recycler.AdapterEmpresa;
 import com.example.bicpark.recycler.OnEmpresaClickListener;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,7 +35,6 @@ public class EmpresaActivity extends AppCompatActivity {
 
     private TextInputEditText editempresa;
     private TextInputLayout ly_editempresa;
-    private MaterialButton addempresa;
     private RecyclerView recyclerView;
     private AdapterEmpresa adapterEmpresa;
     private List<Empresa> empresaList;
@@ -56,7 +49,7 @@ public class EmpresaActivity extends AppCompatActivity {
         empresasDatabase = fDatabase.getReference();
         editempresa = findViewById(R.id.emp_nombre);
         ly_editempresa = findViewById(R.id.emp_lynombre);
-        addempresa = findViewById(R.id.emp_add);
+
 
         recyclerView = findViewById(R.id.emp_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -86,7 +79,7 @@ public class EmpresaActivity extends AppCompatActivity {
             }});
         recyclerView.setAdapter(adapterEmpresa);
 
-        addempresa.setOnClickListener(new View.OnClickListener() {
+        ly_editempresa.setEndIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String nombre = editempresa.getText().toString().trim();
