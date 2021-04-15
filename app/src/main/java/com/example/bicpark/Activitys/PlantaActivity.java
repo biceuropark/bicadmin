@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bicpark.R;
@@ -37,6 +38,7 @@ public class PlantaActivity extends AppCompatActivity {
     private String key;
     private ImageView imagenplanta;
     private PhotoViewAttacher photoViewAttacher;
+    private TextView planta;
 
     private final int PICK_IMAGE = 256;
 
@@ -60,7 +62,8 @@ public class PlantaActivity extends AppCompatActivity {
 
         imagenplanta = findViewById(R.id.plant_image);
         photoViewAttacher = new PhotoViewAttacher(imagenplanta);
-        imagenplanta.setImageResource(R.drawable.planoparking);
+        planta = findViewById(R.id.plant_nombre);
+        planta.setText(key);
 
 
     }

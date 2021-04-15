@@ -3,6 +3,7 @@ package com.example.bicpark.Activitys;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,8 +11,11 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import com.example.bicpark.R;
 import com.example.bicpark.model.Plaza;
@@ -34,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase fDatabase;
     private DatabaseReference databaseReference;
 
+    private EditText SearchNumber;
+
     private RecyclerView recyclerView;
     private AdapterPlaza adapterPlaza;
     private List<Plaza> plazas;
@@ -47,11 +53,25 @@ public class MainActivity extends AppCompatActivity {
         fDatabase = FirebaseDatabase.getInstance();
         databaseReference = fDatabase.getReference();
 
+        SearchNumber = findViewById(R.id.main_searchnumber);
 
         recyclerView = findViewById(R.id.main_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         plazas = new ArrayList<>();
         cargardatos();
+
+        SearchNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                filtrarnumero(editable.toString());
+            }
+        });
+
+
 
         adapterPlaza = new AdapterPlaza(plazas, new OnPlazaClickListener() {
             @Override
@@ -147,4 +167,13 @@ public class MainActivity extends AppCompatActivity {
         }).show();
     }
 
+    private void filtrarnumero(String numero){
+        ArrayList<Plaza> plazaArrayList = new ArrayList<>();
+        for(Plaza pl : plazas){
+            if (String.valueOf(pl.getNumero()).contains(numero)){
+                plazaArrayList.add(pl);
+            }
+        }
+        adapterPlaza.filtrar(plazaArrayList);
+    }
 }

@@ -1,11 +1,11 @@
 package com.example.bicpark.recycler;
 
 
-import android.graphics.Color;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -15,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bicpark.R;
 import com.example.bicpark.model.Plaza;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 
 public class AdapterPlaza extends RecyclerView.Adapter<AdapterPlaza.AdapterViewHolder> {
@@ -45,6 +47,12 @@ public class AdapterPlaza extends RecyclerView.Adapter<AdapterPlaza.AdapterViewH
     public int getItemCount() {
         return plazas.size();
     }
+
+    public void filtrar(ArrayList<Plaza> filtroplazas){
+        this.plazas = filtroplazas;
+        notifyDataSetChanged();
+    }
+
 
     public class AdapterViewHolder extends RecyclerView.ViewHolder {
 

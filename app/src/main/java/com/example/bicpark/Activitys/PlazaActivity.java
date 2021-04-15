@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -70,14 +71,14 @@ public class PlazaActivity extends AppCompatActivity {
                 String empresa = sp_empresa.getSelectedItem().toString().trim();
                 String uid = UUID.randomUUID().toString();
 
-                if(numero.isEmpty()){
+                if (numero.isEmpty()) {
                     Snackbar.make(view, "Completa los campos", Snackbar.LENGTH_LONG).show();
                     return;
                 }
 
                 Plaza plaza = new Plaza();
                 plaza.setNumero(Integer.parseInt(numero));
-                if(!persona.isEmpty()){
+                if (!persona.isEmpty()) {
                     plaza.setPersona(persona);
                 }
                 plaza.setEstado(estado);
@@ -87,7 +88,7 @@ public class PlazaActivity extends AppCompatActivity {
 
                 MaterialAlertDialogBuilder Dialog = new MaterialAlertDialogBuilder(PlazaActivity.this);
                 Dialog.setTitle("Plazas");
-                Dialog.setMessage("¿Estas seguro que quieres crear la plaza "+edit_numero.getText().toString()+"?");
+                Dialog.setMessage("¿Estas seguro que quieres crear la plaza " + edit_numero.getText().toString() + "?");
                 Dialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -100,7 +101,8 @@ public class PlazaActivity extends AppCompatActivity {
                         dialogInterface.cancel();
                     }
                 }).show();
-            }
+                }
+
         });
 
         btn_cancel.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +113,8 @@ public class PlazaActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
     }
 
     private void cargarEmpresas(){

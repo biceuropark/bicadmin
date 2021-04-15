@@ -39,27 +39,28 @@ public class EdificioActivity extends AppCompatActivity {
         parking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                enviardatos("parking");
+                enviardatos("Parking");
+                finish();
             }
         });
         planta0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                enviardatos("planta0");
+                enviardatos("Planta 0");
                 finish();
             }
         });
         planta1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                enviardatos("planta1");
+                enviardatos("Planta 1");
                 finish();
             }
         });
         planta2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                enviardatos("planta2");
+                enviardatos("Planta 2");
                 finish();
             }
         });
@@ -128,5 +129,10 @@ public class EdificioActivity extends AppCompatActivity {
         intent.putExtra("key", key);
         setResult(RESULT_OK, intent);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }
