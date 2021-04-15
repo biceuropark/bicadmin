@@ -10,7 +10,7 @@
         android:title="Aparcamientos" />
 
     <item android:id="@+id/item_edi"
-        android:icon="@drawable/ic_coche"
+        android:icon="@drawable/ic_edificio"
         android:title="Edificio" />
 
     <item android:id="@+id/item_des"

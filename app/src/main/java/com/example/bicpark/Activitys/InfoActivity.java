@@ -1,4 +1,4 @@
-package com.example.bicpark;
+package com.example.bicpark.Activitys;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.bicpark.R;
 import com.example.bicpark.model.Empresa;
 import com.example.bicpark.model.Plaza;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -51,7 +52,7 @@ public class InfoActivity extends AppCompatActivity {
         databaseReference = fDatabase.getReference();
 
         explaza = (Plaza) getIntent().getSerializableExtra("explaza");
-
+        comprobacion();
         edit_numero = findViewById(R.id.info_numero);
         edit_persona = findViewById(R.id.info_Persona);
         sp_empresa = findViewById(R.id.info_empresa);
@@ -201,6 +202,13 @@ public class InfoActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void comprobacion(){
+        if(explaza == null){
+            Toast.makeText(getApplicationContext(), "No cumples los requesitos para acceder a esta pagina", Toast.LENGTH_LONG).show();
+            finish();
+        }
     }
 
 }

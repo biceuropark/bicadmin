@@ -1,4 +1,4 @@
-package com.example.bicpark;
+package com.example.bicpark.Activitys;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
+import com.example.bicpark.R;
 import com.example.bicpark.model.Empresa;
 import com.example.bicpark.model.Plaza;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;

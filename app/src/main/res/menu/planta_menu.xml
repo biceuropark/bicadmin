@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menupl_camara"
+        android:icon="@drawable/ic_camara"
+        android:title="Cambiar imagen" />
+    <item android:id="@+id/menupl_volver"
+        android:icon="@drawable/ic_back"
+        android:title="Volver" />
+</menu>

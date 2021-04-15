@@ -63,14 +63,6 @@ public class AdapterPlaza extends RecyclerView.Adapter<AdapterPlaza.AdapterViewH
             numero.setText(String.valueOf(pl.getNumero()));
             empresa.setText(pl.getEmpresa());
             estado.setText(pl.getEstado());
-
-            if(pl.getEstado() == "Libre"){
-                estado.setTextColor(Color.rgb(0, 255, 0));
-            }else if(pl.getEstado() == "Nula"){
-                estado.setTextColor(Color.rgb(255, 0, 0));
-            }else if(pl.getEstado() == "Alquilada"){
-                estado.setTextColor(Color.rgb(255, 255, 0));
-            }
             btneditar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

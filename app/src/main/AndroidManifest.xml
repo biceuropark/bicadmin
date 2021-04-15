@@ -9,17 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bicpark">
-        <activity android:name=".PlazaActivity"></activity>
-        <activity android:name=".EmpresaActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".Activitys.PlantaActivity"></activity>
+        <activity android:name=".Activitys.EdificioActivity" />
+        <activity android:name=".Activitys.PlazaActivity" />
+        <activity android:name=".Activitys.EmpresaActivity" />
+        <activity android:name=".Activitys.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".InfoActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Activitys.InfoActivity" />
+        <activity android:name=".Activitys.MainActivity" />
     </application>
 
 </manifest>

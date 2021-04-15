@@ -1,4 +1,4 @@
-package com.example.bicpark;
+package com.example.bicpark.Activitys;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,14 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.bicpark.R;
 import com.example.bicpark.model.Plaza;
 import com.example.bicpark.recycler.AdapterPlaza;
 import com.example.bicpark.recycler.OnPlazaClickListener;
@@ -110,6 +109,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.item_aparca:
                 Intent aparca = new Intent(MainActivity.this, PlazaActivity.class);
                 startActivity(aparca);
+                break;
+            case R.id.item_edi:
+                Intent edi = new Intent(MainActivity.this, EdificioActivity.class);
+                startActivity(edi);
                 break;
             case R.id.item_des:
                 AlertDisconect();
