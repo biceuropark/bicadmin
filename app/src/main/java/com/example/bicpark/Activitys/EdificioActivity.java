@@ -46,21 +46,21 @@ public class EdificioActivity extends AppCompatActivity {
         planta0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                enviardatos("Planta 0");
+                enviardatos("Oficina 0");
                 finish();
             }
         });
         planta1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                enviardatos("Planta 1");
+                enviardatos("Oficina 1");
                 finish();
             }
         });
         planta2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                enviardatos("Planta 2");
+                enviardatos("Oficina 2");
                 finish();
             }
         });

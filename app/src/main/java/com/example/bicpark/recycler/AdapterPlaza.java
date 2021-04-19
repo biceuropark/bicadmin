@@ -20,7 +20,7 @@ import java.util.List;
 
 
 
-public class AdapterPlaza extends RecyclerView.Adapter<AdapterPlaza.AdapterViewHolder> {
+public class AdapterPlaza extends RecyclerView.Adapter<AdapterPlaza.AdapterViewHolder>{
 
     private List<Plaza> plazas;
     public static OnPlazaClickListener listener;
@@ -52,6 +52,7 @@ public class AdapterPlaza extends RecyclerView.Adapter<AdapterPlaza.AdapterViewH
         this.plazas = filtroplazas;
         notifyDataSetChanged();
     }
+
 
 
     public class AdapterViewHolder extends RecyclerView.ViewHolder {

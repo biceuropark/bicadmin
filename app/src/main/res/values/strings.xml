@@ -11,6 +11,7 @@
         <item name="Nula">Nula</item>
         <item name="Alquilada">Alquilada</item>
     </string-array>
+    <string name="prompt">Estado</string>
     <!--Tipo de plaza-->
     <string-array name="tipo">
         <item name="Exterior">Exterior</item>
