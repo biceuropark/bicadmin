@@ -50,6 +50,7 @@ public class OficinaActivity extends AppCompatActivity {
         fDatabase = FirebaseDatabase.getInstance();
         databaseReference = fDatabase.getReference();
         obtenerintencion();
+        cargarEmpresas();
 
         ofinumero = findViewById(R.id.ofi_numero);
         ofiestado = findViewById(R.id.ofi_estado);
@@ -74,7 +75,7 @@ public class OficinaActivity extends AppCompatActivity {
             }
         });
 
-        cargarEmpresas();
+
 
         ofiguardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,8 +87,7 @@ public class OficinaActivity extends AppCompatActivity {
         oficancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(OficinaActivity.this, EdificioActivity.class);
-                startActivity(intent);
+                enviarkey();
                 finish();
             }
         });
@@ -115,9 +115,17 @@ public class OficinaActivity extends AppCompatActivity {
             oficina.setNumero(Integer.parseInt(num));
             oficina.setEstado(estado);
             databaseReference.child("Edificio").child(key).child(oficina.getUid()).setValue(oficina);
+
         }
+        takeofi = null;
+        limpiaredit();
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        takeofi = null;
+        enviarkey();
+        finish();
     }
 
     private void cargarEmpresas() {
@@ -154,6 +162,12 @@ public class OficinaActivity extends AppCompatActivity {
         Bundle bundleofi = getofi.getExtras();
         takeofi = (Oficina) bundleofi.getSerializable("exofi");
     }
+    private void enviarkey(){
+        Intent intent = new Intent(OficinaActivity.this, PlantaActivity.class);
+        intent.putExtra("key", key);
+        setResult(RESULT_OK, intent);
+        startActivity(intent);
+    }
 
     public static int obtenerPosicionItem(Spinner spinner, String string) {
         int posicion = 0;
@@ -163,7 +177,14 @@ public class OficinaActivity extends AppCompatActivity {
             }
         }
         return posicion;
-    } public void AlertaBorrar() {
+    }
+
+    private void limpiaredit(){
+        ofinumero.setText("");
+    }
+
+
+    public void AlertaBorrar() {
         MaterialAlertDialogBuilder Dialog = new MaterialAlertDialogBuilder(OficinaActivity.this);
         Dialog.setTitle("Borrar oficina");
         Dialog.setMessage("¿Quieres borrar la oficina?");
