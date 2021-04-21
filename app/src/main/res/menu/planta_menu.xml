@@ -3,6 +3,11 @@
     <item android:id="@+id/menupl_camara"
         android:icon="@drawable/ic_camara"
         android:title="Cambiar imagen" />
+
+    <item android:id="@+id/menupl_add"
+        android:icon="@drawable/ic_add"
+        android:title="Añadir Oficina"></item>
+
     <item android:id="@+id/menupl_volver"
         android:icon="@drawable/ic_back"
         android:title="Volver" />

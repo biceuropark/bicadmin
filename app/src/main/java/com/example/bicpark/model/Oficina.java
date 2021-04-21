@@ -1,28 +1,31 @@
 package com.example.bicpark.model;
 
-public class Oficina {
+import java.io.Serializable;
 
-    private String planta;
+public class Oficina implements Serializable {
+
+    private String uid;
     private String empresa;
-    private String lado;
     private Integer numero;
+    private String estado;
 
 
-    public String getPlanta() {
-        return planta;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setPlanta(String planta) {
-        this.planta = planta;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
-    public String getLado() {
-        return lado;
+    public String getUid() {
+        return uid;
     }
 
-    public void setLado(String lado) {
-        this.lado = lado;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
+
 
     public String getEmpresa() {
         return empresa;

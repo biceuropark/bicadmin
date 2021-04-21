@@ -83,5 +83,4 @@ public class  Filtros {
         adapterPlaza.filtrar(plazaArrayList);
     }
 
-
 }

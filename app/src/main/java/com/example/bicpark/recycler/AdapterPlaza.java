@@ -2,6 +2,7 @@ package com.example.bicpark.recycler;
 
 
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,7 @@ public class AdapterPlaza extends RecyclerView.Adapter<AdapterPlaza.AdapterViewH
 
         public AdapterViewHolder(@NonNull View itemView) {
             super(itemView);
-            numero = itemView.findViewById(R.id.rvm_numero);
+            numero = itemView.findViewById(R.id.rvpl_numero);
             empresa = itemView.findViewById(R.id.rvm_empresa);
             estado = itemView.findViewById(R.id.rvm_estado);
             btneditar = itemView.findViewById(R.id.rvm_inf);
@@ -71,7 +72,22 @@ public class AdapterPlaza extends RecyclerView.Adapter<AdapterPlaza.AdapterViewH
         private void bind(Plaza pl){
             numero.setText(String.valueOf(pl.getNumero()));
             empresa.setText(pl.getEmpresa());
-            estado.setText(pl.getEstado());
+            switch (pl.getEstado()){
+                case "Alquilada" :
+                    estado.setTextColor(Color.rgb(180, 180,0));
+                    estado.setText(pl.getEstado());
+                    break;
+                case "Libre" :
+                    estado.setTextColor(Color.rgb(0, 200,0));
+                    estado.setText(pl.getEstado());
+                    break;
+                case "Nula" :
+                    estado.setTextColor(Color.rgb(200, 0,0));
+                    estado.setText(pl.getEstado());
+                    break;
+            }
+
+
             btneditar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -18,7 +18,7 @@
             android:layout_gravity="center">
 
             <TextView
-                android:id="@+id/rvm_numero"
+                android:id="@+id/rvpl_numero"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -41,7 +41,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/rvm_estado"
                 app:layout_constraintHorizontal_bias="0.3"
-                app:layout_constraintStart_toEndOf="@+id/rvm_numero"
+                app:layout_constraintStart_toEndOf="@+id/rvpl_numero"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView

@@ -11,10 +11,16 @@
         <item name="Nula">Nula</item>
         <item name="Alquilada">Alquilada</item>
     </string-array>
-    <string name="prompt">Estado</string>
     <!--Tipo de plaza-->
     <string-array name="tipo">
         <item name="Exterior">Exterior</item>
         <item name="Techada">Techada</item>
+    </string-array>
+    <!--Estado oficina-->
+    <string-array name="oficinaestado">
+        <item name="Ocupado">Ocupado</item>
+        <item name="Reservado">Reservado</item>
+        <item name="Interés">Interés</item>
+        <item name="Libre">Libre</item>
     </string-array>
 </resources>
