@@ -23,4 +23,10 @@
         <item name="Interés">Interés</item>
         <item name="Libre">Libre</item>
     </string-array>
+
+    <string-array name="oficinaidentificador">
+        <item name="Derecha">Derecha</item>
+        <item name="Izquierda">Izquierda</item>
+        <item name="M">M</item>
+    </string-array>
 </resources>

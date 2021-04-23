@@ -18,7 +18,7 @@
             android:layout_gravity="center">
 
             <TextView
-                android:id="@+id/rvpl_numero"
+                android:id="@+id/rvm_numero"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -36,9 +36,12 @@
                 android:id="@+id/rvm_empresa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="43dp"
+                android:layout_marginRight="43dp"
                 android:text="Empresa"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/rvm_estado"
                 app:layout_constraintEnd_toStartOf="@+id/rvm_estado"
                 app:layout_constraintHorizontal_bias="0.3"
                 app:layout_constraintStart_toEndOf="@+id/rvpl_numero"

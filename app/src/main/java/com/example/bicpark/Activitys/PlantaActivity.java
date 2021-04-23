@@ -22,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.bicpark.R;
 import com.example.bicpark.model.Empresa;
 import com.example.bicpark.model.Oficina;
@@ -86,11 +87,13 @@ public class PlantaActivity extends AppCompatActivity {
         Bundle bundlekey = getkey.getExtras();
         key = bundlekey.getString("key");
 
-        //ordenar();
+
         imagenplanta = findViewById(R.id.plant_image);
+        Glide.with(getApplicationContext()).load(R.drawable.gifdefinitivo).into(imagenplanta);
         photoViewAttacher = new PhotoViewAttacher(imagenplanta);
         planta = findViewById(R.id.plant_nombre);
         planta.setText(key);
+
 
 
         recyclerView = findViewById(R.id.plant_recycler);
@@ -112,6 +115,7 @@ public class PlantaActivity extends AppCompatActivity {
         comprobacion();
         cargardb();
 
+        ordenar();
 
     }
 
@@ -124,7 +128,6 @@ public class PlantaActivity extends AppCompatActivity {
                     Oficina ofi = ds.getValue(Oficina.class);
                     oficinas.add(ofi);
                 }
-
                 adapter.notifyDataSetChanged();
             }
 
@@ -216,7 +219,7 @@ public class PlantaActivity extends AppCompatActivity {
         Collections.sort(oficinas, new Comparator<Oficina>() {
             @Override
             public int compare(Oficina oficina, Oficina o1) {
-                //Comparamos el numero de cada plaza y lo ordenamos
+                //Comparamos el numero de cada oficina y lo ordenamos
                 if(key == "Oficina 0"){
                 return Integer.compare(Integer.valueOf(oficina.getNumero()), Integer.valueOf(o1.getNumero()));
                 }

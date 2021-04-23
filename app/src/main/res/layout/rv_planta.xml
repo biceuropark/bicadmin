@@ -32,6 +32,19 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/rvpl_identificador"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:text="Identificador"
+                android:textColor="#7799E3"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/rvpl_numero"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
                 android:id="@+id/rvpl_empresa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -39,15 +52,18 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/rvpl_editar"
-                app:layout_constraintStart_toEndOf="@+id/rvpl_numero"
+                app:layout_constraintStart_toEndOf="@+id/rvpl_identificador"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
             <ImageButton
                 android:id="@+id/rvpl_editar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
 
+                android:background="@color/secondary"
                 android:src="@drawable/ic_edit"
+                android:tint="@android:color/secondary_text_light"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

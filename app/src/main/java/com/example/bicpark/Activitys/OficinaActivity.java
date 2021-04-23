@@ -33,7 +33,7 @@ import java.util.UUID;
 public class OficinaActivity extends AppCompatActivity {
 
     private TextInputEditText ofinumero;
-    private Spinner ofiestado;
+    private Spinner ofiestado, ofiiden;
     private SearchableSpinner ofiempresa;
     private Button ofiguardar, oficancelar, ofiborrar;
     private FirebaseDatabase fDatabase;
@@ -58,6 +58,7 @@ public class OficinaActivity extends AppCompatActivity {
         ofiguardar = findViewById(R.id.ofi_save);
         oficancelar = findViewById(R.id.ofi_cancel);
         ofiborrar = findViewById(R.id.ofi_borrar);
+        ofiiden = findViewById(R.id.ofi_iden);
 
         if(takeofi == null){
             ofiborrar.setEnabled(false);
@@ -71,7 +72,7 @@ public class OficinaActivity extends AppCompatActivity {
         ofiborrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertaBorrar();
+                AlertaBorrar(view);
             }
         });
 
@@ -97,6 +98,7 @@ public class OficinaActivity extends AppCompatActivity {
         String num = ofinumero.getText().toString().trim();
         String emp = ofiempresa.getSelectedItem().toString();
         String estado = ofiestado.getSelectedItem().toString();
+        String identificador = ofiiden.getSelectedItem().toString();
         if(num.isEmpty()){
             Snackbar.make(view, "Rellena los campos", Snackbar.LENGTH_LONG).show();
             return;
@@ -107,6 +109,7 @@ public class OficinaActivity extends AppCompatActivity {
             oficina.setEmpresa(emp);
             oficina.setNumero(Integer.parseInt(num));
             oficina.setEstado(estado);
+            oficina.setIdentificador(identificador);
             databaseReference.child("Edificio").child(key).child(oficina.getUid()).setValue(oficina);
         }else if(takeofi != null){
             Oficina oficina = new Oficina();
@@ -114,9 +117,11 @@ public class OficinaActivity extends AppCompatActivity {
             oficina.setEmpresa(emp);
             oficina.setNumero(Integer.parseInt(num));
             oficina.setEstado(estado);
+            oficina.setIdentificador(identificador);
             databaseReference.child("Edificio").child(key).child(oficina.getUid()).setValue(oficina);
 
         }
+        Snackbar.make(view, "La oficina ha sido creada", Snackbar.LENGTH_LONG).show();
         takeofi = null;
         limpiaredit();
     }
@@ -140,7 +145,7 @@ public class OficinaActivity extends AppCompatActivity {
                     empresas.add(emp);
                 }
 
-                //Le asigno el adapter a la lista de las empresas
+                //Le asigno el adapter a la lista de las oficinas
                 ArrayAdapter<Empresa> arrayAdapter = new ArrayAdapter<>(OficinaActivity.this, android.R.layout.simple_spinner_item, empresas);
                 arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 ofiempresa.setAdapter(arrayAdapter);
@@ -184,7 +189,7 @@ public class OficinaActivity extends AppCompatActivity {
     }
 
 
-    public void AlertaBorrar() {
+    public void AlertaBorrar(View view) {
         MaterialAlertDialogBuilder Dialog = new MaterialAlertDialogBuilder(OficinaActivity.this);
         Dialog.setTitle("Borrar oficina");
         Dialog.setMessage("¿Quieres borrar la oficina?");
@@ -192,6 +197,8 @@ public class OficinaActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 databaseReference.child("Edificio").child(key).child(takeofi.getUid()).removeValue();
+                limpiaredit();
+                Snackbar.make(view, "La oficina ha sido borrada", Snackbar.LENGTH_LONG).show();
             }
         });
         Dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {

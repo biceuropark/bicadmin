@@ -167,6 +167,9 @@ public class InfoActivity extends AppCompatActivity {
                     emp.setNombre(nombre);
                     empresas.add(emp);
                 }
+                Empresa empresa1 = new Empresa();
+                empresa1.setNombre("Ninguna");
+                empresas.add(0, empresa1);
                 ArrayAdapter<Empresa> arrayAdapter = new ArrayAdapter<>(InfoActivity.this, R.layout.support_simple_spinner_dropdown_item, empresas);
                 sp_empresa.setAdapter(arrayAdapter);
                 sp_empresa.setSelection(obtenerPosicionItem(sp_empresa, explaza.getEmpresa()));

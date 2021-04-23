@@ -13,8 +13,8 @@
         android:background="@color/secondary">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="331dp"
+            android:layout_height="441dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,6 +65,18 @@
                     android:id="@+id/ofi_empresa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:text="Identificador" />
+
+                <Spinner
+                    android:id="@+id/ofi_iden"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/oficinaidentificador" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

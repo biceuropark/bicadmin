@@ -8,6 +8,7 @@ public class Oficina implements Serializable {
     private String empresa;
     private Integer numero;
     private String estado;
+    private String identificador;
 
 
     public String getEstado() {
@@ -25,7 +26,13 @@ public class Oficina implements Serializable {
     public void setUid(String uid) {
         this.uid = uid;
     }
+    public String getIdentificador() {
+        return identificador;
+    }
 
+    public void setIdentificador(String identificador) {
+        this.identificador = identificador;
+    }
 
     public String getEmpresa() {
         return empresa;

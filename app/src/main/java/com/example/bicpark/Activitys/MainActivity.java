@@ -20,9 +20,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.bicpark.R;
 import com.example.bicpark.filtros.Filtros;
 import com.example.bicpark.model.Empresa;
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private SearchableSpinner SearchEmpresa;
     private TextView contador;
     private String listener = "";
+    private ImageView bicgif;
 
     private ArrayList<Plaza> plazaArrayList;
     private Filtros filtros;
@@ -76,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.main_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         plazas = new ArrayList<>();
+        //Gif de carga
+        Glide.with(getApplicationContext()).load(R.drawable.gifdefinitivo).into(bicgif);
 
         //Cargar datos de la base de datos
         construirspinner();
@@ -168,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
                     Plaza plaza = ds.getValue(Plaza.class);
                     plazas.add(plaza);
                 }
+                bicgif.setVisibility(View.GONE);
                 //Notifico cambios al adaptador
                 adapterPlaza.notifyDataSetChanged();
             }
@@ -228,6 +234,7 @@ public class MainActivity extends AppCompatActivity {
         SearchEstado = findViewById(R.id.main_searchestado);
         SearchEmpresa = findViewById(R.id.main_searchempresa);
         contador = findViewById(R.id.main_contador);
+        bicgif = findViewById(R.id.gif);
 
     }
 

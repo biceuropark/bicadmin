@@ -56,7 +56,7 @@ public class AdapterEdificio extends RecyclerView.Adapter<AdapterEdificio.Adapte
     public class AdapterViewHolder extends RecyclerView.ViewHolder {
 
 
-        TextView numero, empresa;
+        TextView numero, empresa, iden;
         ImageButton editar;
 
 
@@ -65,6 +65,7 @@ public class AdapterEdificio extends RecyclerView.Adapter<AdapterEdificio.Adapte
             empresa = itemView.findViewById(R.id.rvpl_empresa);
             numero = itemView.findViewById(R.id.rvpl_numero);
             editar = itemView.findViewById(R.id.rvpl_editar);
+            iden = itemView.findViewById(R.id.rvpl_identificador);
         }
 
 
@@ -72,6 +73,7 @@ public class AdapterEdificio extends RecyclerView.Adapter<AdapterEdificio.Adapte
 
             numero.setText(String.valueOf(oficina.getNumero()));
             empresa.setText(oficina.getEmpresa());
+            iden.setText(oficina.getIdentificador());
             editar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

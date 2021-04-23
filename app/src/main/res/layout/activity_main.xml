@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".Activitys.MainActivity">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,7 +56,11 @@
         </LinearLayout>
 
 
-
+        <ImageView
+            android:id="@+id/gif"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/main_recycler"

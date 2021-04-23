@@ -63,10 +63,11 @@ public class AdapterPlaza extends RecyclerView.Adapter<AdapterPlaza.AdapterViewH
 
         public AdapterViewHolder(@NonNull View itemView) {
             super(itemView);
-            numero = itemView.findViewById(R.id.rvpl_numero);
+            numero = itemView.findViewById(R.id.rvm_numero);
             empresa = itemView.findViewById(R.id.rvm_empresa);
             estado = itemView.findViewById(R.id.rvm_estado);
             btneditar = itemView.findViewById(R.id.rvm_inf);
+
         }
 
         private void bind(Plaza pl){
@@ -74,7 +75,7 @@ public class AdapterPlaza extends RecyclerView.Adapter<AdapterPlaza.AdapterViewH
             empresa.setText(pl.getEmpresa());
             switch (pl.getEstado()){
                 case "Alquilada" :
-                    estado.setTextColor(Color.rgb(180, 180,0));
+                    estado.setTextColor(Color.rgb(119, 119,227));
                     estado.setText(pl.getEstado());
                     break;
                 case "Libre" :
