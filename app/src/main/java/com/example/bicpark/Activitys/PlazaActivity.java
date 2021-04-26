@@ -156,6 +156,8 @@ public class PlazaActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Intent intent = new Intent(PlazaActivity.this, MainActivity.class);
+        startActivity(intent);
         finish();
     }
 }

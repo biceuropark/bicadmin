@@ -133,6 +133,8 @@ public class EdificioActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Intent intent = new Intent(EdificioActivity.this, MainActivity.class);
+        startActivity(intent);
         finish();
     }
 }

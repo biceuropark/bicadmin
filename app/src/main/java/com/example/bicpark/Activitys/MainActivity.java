@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
 
     private EditText SearchNumber;
-    private Spinner SearchEstado;
+    private Spinner SearchEstado, SearchTipo;
     private SearchableSpinner SearchEmpresa;
     private TextView contador;
     private String listener = "";
@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private Filtros filtros;
     private String empresa_f;
     private String estado_f;
+    private String tipo_f;
 
     private RecyclerView recyclerView;
     private AdapterPlaza adapterPlaza;
@@ -83,12 +84,14 @@ public class MainActivity extends AppCompatActivity {
         Glide.with(getApplicationContext()).load(R.drawable.gifdefinitivo).into(bicgif);
 
         //Cargar datos de la base de datos
-        construirspinner();
+        construirspinnerestados();
+        construirspinnertipo();
         cargardatos();
         cargarEmpresas();
 
         //Guardar selección del spinner de estados
         estado_f = SearchEstado.getSelectedItem().toString();
+        tipo_f = SearchTipo.getSelectedItem().toString();
         //Llamada a filtros
         filtros = new Filtros();
 
@@ -108,6 +111,19 @@ public class MainActivity extends AppCompatActivity {
                 listener = String.valueOf(editable);
                 //Ejecutar filtrado
                 filtrado();
+            }
+        });
+
+        SearchTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                tipo_f = SearchTipo.getSelectedItem().toString();
+                filtrado();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 
@@ -185,23 +201,74 @@ public class MainActivity extends AppCompatActivity {
 
     //método de filtrado, llamada a los métodos de la clase Filtrado
     private void filtrado() {
-        if (listener == "" && estado_f == "Todos" && empresa_f == "Todas") {
+
+        //Filtrar TOdOS
+        if (listener == "" && estado_f == "Todos" && empresa_f == "Todas" && tipo_f == "Todos") {
             adapterPlaza.filtrar((ArrayList<Plaza>) plazas);
-        } else if (listener != "" && estado_f == "Todos" && empresa_f == "Todas") {
-            filtros.filtrarnumero(listener, plazas, adapterPlaza);
-        } else if (listener == "" && estado_f != "Todos" && empresa_f == "Todas") {
-            filtros.filtrarestado(estado_f, plazas, adapterPlaza);
-        } else if (listener == "" && estado_f == "Todos" && empresa_f != "Todas") {
-            filtros.filtrarempresa(empresa_f, plazas, adapterPlaza);
-        } else if (listener != "" && estado_f != "Todos" && empresa_f == "Todas") {
-            filtros.filtrarnumeroestado(listener, estado_f, plazas, adapterPlaza);
-        } else if (listener != "" && estado_f == "Todos" && empresa_f != "Todas") {
-            filtros.filtrarnumeroempresa(listener, empresa_f, plazas, adapterPlaza);
-        } else if (listener == "" && estado_f != "Todos" && empresa_f != "Todas") {
-            filtros.filtrarestadoempresa(estado_f, empresa_f, plazas, adapterPlaza);
-        } else if (listener != "" && estado_f != "Todos" && empresa_f != "Todas") {
-            filtros.filtrartodo(estado_f, empresa_f, listener, plazas, adapterPlaza);
         }
+        //Filtrar SOlO NUMERO
+        else if (listener != "" && estado_f == "Todos" && empresa_f == "Todas" && tipo_f == "Todos") {
+            filtros.filtrarnumero(listener, plazas, adapterPlaza);
+        }
+        //Filtrar SOLO ESTADO
+        else if (listener == "" && estado_f != "Todos" && empresa_f == "Todas" && tipo_f == "Todos") {
+            filtros.filtrarestado(estado_f, plazas, adapterPlaza);
+        }
+        //Filtrar SOlO EMPrESA
+        else if (listener == "" && estado_f == "Todos" && empresa_f != "Todas" && tipo_f == "Todos") {
+            filtros.filtrarempresa(empresa_f, plazas, adapterPlaza);
+        //Filtrar SOLO TIPO
+        } else if(listener == "" && estado_f == "Todos" && empresa_f == "Todas" && tipo_f != "Todos"){
+            filtros.filtrartipo(tipo_f, plazas, adapterPlaza);
+
+        }
+        //FILTRAR NUMERO Y ESTADO
+        else if (listener != "" && estado_f != "Todos" && empresa_f == "Todas" && tipo_f == "Todos") {
+            filtros.filtrarnumeroestado(listener, estado_f, plazas, adapterPlaza);
+        }
+        //Filtrar NUMERO Y EMPRESA
+        else if (listener != "" && estado_f == "Todos" && empresa_f != "Todas" && tipo_f == "Todos") {
+            filtros.filtrarnumeroempresa(listener, empresa_f, plazas, adapterPlaza);
+        }
+        //Filtrar EMPRESA Y ESTADO
+        else if (listener == "" && estado_f != "Todos" && empresa_f != "Todas" && tipo_f == "Todos") {
+            filtros.filtrarestadoempresa(estado_f, empresa_f, plazas, adapterPlaza);
+        }
+        //Filtrar TIPO Y NUMERO
+        else if(listener != "" && estado_f == "Todos" && empresa_f == "Todas" && tipo_f != "Todos"){
+            filtros.filtrartiponumero(listener, tipo_f, plazas, adapterPlaza);
+        }
+        //Filtrar TIPO Y ESTADO
+        else if(listener == "" && estado_f != "Todos" && empresa_f == "Todas" && tipo_f != "Todos"){
+            filtros.filtrartipoestado(tipo_f, estado_f, plazas, adapterPlaza);
+        }
+        //FILTRAR TIPO Y EMPRESA
+        else if(listener == "" && estado_f == "Todos" && empresa_f != "Todas" && tipo_f != "Todos"){
+            filtros.filtrartipoempresa(tipo_f, empresa_f, plazas, adapterPlaza);
+        }
+
+        //Filtrar NUMERO TIPO Y EMPrESA
+        else if(listener != "" && estado_f == "Todos" && empresa_f != "Todas" && tipo_f != "Todos"){
+            filtros.filtrarnumerotipoempresa(listener, tipo_f, empresa_f, plazas, adapterPlaza);
+        }
+        //Filtrar TIPO emPresa y ESTADO
+        else if(listener == "" && estado_f != "Todos" && empresa_f != "Todas" && tipo_f != "Todos"){
+            filtros.filtrartipoempresaestado(tipo_f, empresa_f, estado_f, plazas, adapterPlaza);
+        }
+        //Filtrar ESTADO tiPO Y NUMERO
+        else if(listener != "" && estado_f != "Todos" && empresa_f == "Todas" && tipo_f != "Todos"){
+            filtros.filtrarnumerotipoestado(listener, tipo_f, estado_f, plazas, adapterPlaza);
+        }
+        //filtrar ALL
+        else if (listener != "" && estado_f != "Todos" && empresa_f != "Todas" && estado_f == "Todos") {
+            filtros.filtrartodo(estado_f, empresa_f, tipo_f, listener, plazas, adapterPlaza);
+        }
+        /*
+        spinnerArray.add("Todos");
+        spinnerArray.add("Techada");
+        spinnerArray.add("Exterior");
+        spinnerArray.add("Almacen");
+         */
         //Doy un valor a la clase contador para contar los resultados de la búsqueda
         contador.setText("Plazas según el criterio de búsqueda: " + adapterPlaza.getItemCount());
         //Método para ordenar los datos según el número de la plaza
@@ -233,13 +300,14 @@ public class MainActivity extends AppCompatActivity {
         SearchNumber = findViewById(R.id.main_searchnumber);
         SearchEstado = findViewById(R.id.main_searchestado);
         SearchEmpresa = findViewById(R.id.main_searchempresa);
+        SearchTipo = findViewById(R.id.main_searchtipo);
         contador = findViewById(R.id.main_contador);
         bicgif = findViewById(R.id.gif);
 
     }
 
     //Construcción spinner personalizado de estados
-    private void construirspinner() {
+    private void construirspinnerestados() {
         List<String> spinnerArray = new ArrayList<>();
         spinnerArray.add("Todos");
         spinnerArray.add("Libre");
@@ -247,6 +315,16 @@ public class MainActivity extends AppCompatActivity {
         spinnerArray.add("Nula");
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, spinnerArray);
         SearchEstado.setAdapter(spinnerAdapter);
+    }
+    //Construcción spinner personalizado tipo
+    private void construirspinnertipo(){
+        List<String> spinnerArray = new ArrayList<>();
+        spinnerArray.add("Todos");
+        spinnerArray.add("Techada");
+        spinnerArray.add("Exterior");
+        spinnerArray.add("Almacen");
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, spinnerArray);
+        SearchTipo.setAdapter(spinnerAdapter);
     }
 
     //Carga de empresas de la base de datos
@@ -301,14 +379,17 @@ public class MainActivity extends AppCompatActivity {
             case R.id.item_empresa:
                 Intent empresa = new Intent(MainActivity.this, EmpresaActivity.class);
                 startActivity(empresa);
+                finish();
                 break;
             case R.id.item_aparca:
                 Intent aparca = new Intent(MainActivity.this, PlazaActivity.class);
                 startActivity(aparca);
+                finish();
                 break;
             case R.id.item_edi:
                 Intent edi = new Intent(MainActivity.this, EdificioActivity.class);
                 startActivity(edi);
+                finish();
                 break;
             case R.id.item_des:
                 AlertDisconect();

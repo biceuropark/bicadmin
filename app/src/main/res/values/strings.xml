@@ -15,6 +15,7 @@
     <string-array name="tipo">
         <item name="Exterior">Exterior</item>
         <item name="Techada">Techada</item>
+        <item name="Almacen">Almacén</item>
     </string-array>
     <!--Estado oficina-->
     <string-array name="oficinaestado">
