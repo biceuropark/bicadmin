@@ -13,6 +13,10 @@
         android:icon="@drawable/ic_edificio"
         android:title="Edificio" />
 
+    <item android:id="@+id/item_pdf"
+        android:icon="@drawable/ic_pdf"
+        android:title="Descargar PDF"/>
+
     <item android:id="@+id/item_des"
         android:icon="@drawable/ic_salir"
         android:title="Desconectar" />

@@ -7,10 +7,17 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.DownloadManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -19,10 +26,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.bicpark.R;
@@ -31,6 +40,7 @@ import com.example.bicpark.model.Empresa;
 import com.example.bicpark.model.Plaza;
 import com.example.bicpark.recycler.AdapterPlaza;
 import com.example.bicpark.recycler.OnPlazaClickListener;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -47,6 +57,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int PERMISO_STORAGE = 356;
     private FirebaseAuth fbAuth;
     private FirebaseDatabase fDatabase;
     private DatabaseReference databaseReference;
@@ -58,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
     private String listener = "";
     private ImageView bicgif;
 
-    private ArrayList<Plaza> plazaArrayList;
     private Filtros filtros;
     private String empresa_f;
     private String estado_f;
@@ -372,7 +382,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
-    //Método para darle funciones al menu
+    //Método para darle funciones al menu y darle navegación a la aplicación
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -391,11 +401,68 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(edi);
                 finish();
                 break;
+            case R.id.item_pdf:
+                checkearpermisos();
+                break;
             case R.id.item_des:
                 AlertDisconect();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void checkearpermisos(){
+        //Si el SO es marshmallow o superior, manejamos el permiso
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
+                //Permiso denegado, solicitamos
+                String[] permisos = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                //mostramos pop-up para otorgar el permiso
+                requestPermissions(permisos, PERMISO_STORAGE);
+            }else{
+                //Permiso otorgado, comenzamos descarga
+                descarga();
+            }
+        }
+        else {
+            //Si el SO es menor que marshmallow, llevamos a cabo la descarga
+            descarga();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case PERMISO_STORAGE: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    //Permiso otorgado desde el pop-up
+                    descarga();
+                }
+                else {
+                    //Permiso denegado desde el pop-up
+                    Toast.makeText(this, "Permiso denegado", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+    }
+
+    private void descarga(){
+        //Url del archivo
+        String url = "https://firebasestorage.googleapis.com/v0/b/biceuropark-2a103.appspot.com/o/PDF%2FAversipuedo.pdf?alt=media&token=61d1c0d1-76c4-4d59-8b07-a3a5442864c9";
+        //Creamos una petición de descarga
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+        //Permitimos los tipos de conexión para descargar archivos
+        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
+        //Titulo de la notificación de descarga
+        request.setTitle(""+System.currentTimeMillis()+".pdf");
+        //Descripción de la notificación de descarga
+        request.setDescription("Descargando archivo...");
+        request.allowScanningByMediaScanner();
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, ""+System.currentTimeMillis()+".pdf");//Guardado del archivo en carpeta descargas y nombre con el tiempo del dispositivo
+        //Obtenemos el servicio de descarga y el archivo en cola
+        DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        manager.enqueue(request);
     }
 
     //LLamada al método BackPressed cuando se pulsa el botón atrás

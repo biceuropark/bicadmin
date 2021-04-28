@@ -55,7 +55,7 @@
                                 android:layout_height="120dp"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_margin="5dp"
-                                android:src="@drawable/planoparking"/>
+                                android:src="@drawable/planoparking" />
 
                             <TextView
                                 android:layout_width="wrap_content"
