@@ -140,6 +140,16 @@ public class  Filtros {
         adapterPlaza.filtrar(plazaArrayList);
     }
 
+    public void filtrarnumeroempresaestado(String numero, String estado, String empresa, List<Plaza> plazas, AdapterPlaza adapterPlaza){
+        ArrayList<Plaza> plazaArrayList = new ArrayList<>();
+        for (Plaza pl : plazas){
+            if(pl.getEmpresa().contains(empresa) && pl.getEstado().contains(estado) && String.valueOf(pl.getNumero()).contains(numero)){
+                plazaArrayList.add(pl);
+            }
+        }
+        adapterPlaza.filtrar(plazaArrayList);
+    }
+
     public void filtrartodo(String estado, String empresa, String numero, String tipo, List<Plaza> plazas, AdapterPlaza adapterPlaza){
         ArrayList<Plaza> plazaArrayList = new ArrayList<>();
         for (Plaza pl : plazas){

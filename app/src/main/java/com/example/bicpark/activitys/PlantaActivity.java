@@ -1,4 +1,4 @@
-package com.example.bicpark.Activitys;
+package com.example.bicpark.activitys;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,20 +13,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.bicpark.R;
-import com.example.bicpark.model.Empresa;
 import com.example.bicpark.model.Oficina;
-import com.example.bicpark.model.Plaza;
 import com.example.bicpark.recycler.AdapterEdificio;
 import com.example.bicpark.recycler.OnOficicinaClickListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -40,13 +33,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.UUID;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
 
@@ -115,7 +106,6 @@ public class PlantaActivity extends AppCompatActivity {
         comprobacion();
         cargardb();
 
-        ordenar();
 
     }
 
@@ -128,7 +118,9 @@ public class PlantaActivity extends AppCompatActivity {
                     Oficina ofi = ds.getValue(Oficina.class);
                     oficinas.add(ofi);
                 }
+                ordenar(oficinas);
                 adapter.notifyDataSetChanged();
+
             }
 
             @Override
@@ -138,8 +130,25 @@ public class PlantaActivity extends AppCompatActivity {
         });
     }
 
+    private static void ordenar(List<Oficina> persons) {
 
+        Collections.sort(persons, new Comparator() {
 
+            public int compare(Object o1, Object o2) {
+
+                String x1 = ((Oficina) o1).getIdentificador();
+                String x2 = ((Oficina) o2).getIdentificador();
+                int sComp = x1.compareTo(x2);
+
+                if (sComp != 0) {
+                    return sComp;
+                }
+
+                Integer x3 = ((Oficina) o1).getNumero();
+                Integer x4 = ((Oficina) o2).getNumero();
+                return x3.compareTo(x4);
+            }});
+    }
 
     private void comprobacion(){
         if(key == null){
@@ -212,18 +221,6 @@ public class PlantaActivity extends AppCompatActivity {
             public void onSuccess(Uri uri) {
                 Picasso.get().load(uri).into(imagenplanta);
                 photoViewAttacher.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-            }
-        });
-    }
-    private void ordenar() {
-        Collections.sort(oficinas, new Comparator<Oficina>() {
-            @Override
-            public int compare(Oficina oficina, Oficina o1) {
-                //Comparamos el numero de cada oficina y lo ordenamos
-                if(key == "Oficina 0"){
-                return Integer.compare(Integer.valueOf(oficina.getNumero()), Integer.valueOf(o1.getNumero()));
-                }
-                return 1;
             }
         });
     }

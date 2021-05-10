@@ -1,9 +1,8 @@
-package com.example.bicpark.Activitys;
+package com.example.bicpark.activitys;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
-import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,13 +19,11 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -40,7 +37,6 @@ import com.example.bicpark.model.Empresa;
 import com.example.bicpark.model.Plaza;
 import com.example.bicpark.recycler.AdapterPlaza;
 import com.example.bicpark.recycler.OnPlazaClickListener;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -269,16 +265,15 @@ public class MainActivity extends AppCompatActivity {
         else if(listener != "" && estado_f != "Todos" && empresa_f == "Todas" && tipo_f != "Todos"){
             filtros.filtrarnumerotipoestado(listener, tipo_f, estado_f, plazas, adapterPlaza);
         }
+        //Filtrar NUMERO, EMPRESA Y ESTADO
+        else if(listener != "" && estado_f != "Todos" && empresa_f != "Todas" && tipo_f == "Todos"){
+            filtros.filtrarnumeroempresaestado(listener, estado_f, empresa_f, plazas, adapterPlaza);
+        }
         //filtrar ALL
-        else if (listener != "" && estado_f != "Todos" && empresa_f != "Todas" && estado_f == "Todos") {
+        else if (listener != "" && estado_f != "Todos" && empresa_f != "Todas" && estado_f != "Todos") {
             filtros.filtrartodo(estado_f, empresa_f, tipo_f, listener, plazas, adapterPlaza);
         }
-        /*
-        spinnerArray.add("Todos");
-        spinnerArray.add("Techada");
-        spinnerArray.add("Exterior");
-        spinnerArray.add("Almacen");
-         */
+
         //Doy un valor a la clase contador para contar los resultados de la búsqueda
         contador.setText("Plazas según el criterio de búsqueda: " + adapterPlaza.getItemCount());
         //Método para ordenar los datos según el número de la plaza

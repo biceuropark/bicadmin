@@ -58,7 +58,7 @@ public class AdapterPlaza extends RecyclerView.Adapter<AdapterPlaza.AdapterViewH
 
     public class AdapterViewHolder extends RecyclerView.ViewHolder {
 
-        TextView numero, estado, empresa;
+        TextView numero, estado, empresa, tipo;
         ImageButton btneditar;
 
         public AdapterViewHolder(@NonNull View itemView) {
@@ -66,8 +66,8 @@ public class AdapterPlaza extends RecyclerView.Adapter<AdapterPlaza.AdapterViewH
             numero = itemView.findViewById(R.id.rvm_numero);
             empresa = itemView.findViewById(R.id.rvm_empresa);
             estado = itemView.findViewById(R.id.rvm_estado);
+            tipo = itemView.findViewById(R.id.rvm_tipo);
             btneditar = itemView.findViewById(R.id.rvm_inf);
-
         }
 
         private void bind(Plaza pl){
@@ -87,6 +87,7 @@ public class AdapterPlaza extends RecyclerView.Adapter<AdapterPlaza.AdapterViewH
                     estado.setText(pl.getEstado());
                     break;
             }
+            tipo.setText("Tipo: "+pl.getTipo());
 
 
             btneditar.setOnClickListener(new View.OnClickListener() {

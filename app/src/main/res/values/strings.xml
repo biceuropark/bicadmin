@@ -29,5 +29,7 @@
         <item name="Derecha">Derecha</item>
         <item name="Izquierda">Izquierda</item>
         <item name="M">M</item>
+        <item name="A">A</item>
     </string-array>
+
 </resources>

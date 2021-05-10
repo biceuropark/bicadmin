@@ -31,22 +31,30 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
-            <TextView
-                android:id="@+id/rvm_empresa"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="43dp"
-                android:layout_marginRight="43dp"
-                android:text="Empresa"
-                android:textColor="@color/black"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/rvm_estado"
-                app:layout_constraintEnd_toStartOf="@+id/rvm_estado"
-                app:layout_constraintHorizontal_bias="0.3"
-                app:layout_constraintStart_toEndOf="@+id/rvpl_numero"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toEndOf="@+id/rvm_numero"
+                app:layout_constraintTop_toTopOf="parent">
 
+                <TextView
+                    android:id="@+id/rvm_empresa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Empresa"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/rvm_tipo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="Tipo" />
+            </LinearLayout>
             <TextView
                 android:id="@+id/rvm_estado"
                 android:layout_width="wrap_content"
@@ -61,7 +69,7 @@
 
             <ImageButton
                 android:id="@+id/rvm_inf"
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:background="@color/primary"
                 android:src="@drawable/ic_right"

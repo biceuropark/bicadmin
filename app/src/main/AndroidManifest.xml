@@ -13,20 +13,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bicpark">
-        <activity android:name=".Activitys.OficinaActivity" />
-        <activity android:name=".Activitys.PlantaActivity" />
-        <activity android:name=".Activitys.EdificioActivity" />
-        <activity android:name=".Activitys.PlazaActivity" />
-        <activity android:name=".Activitys.EmpresaActivity" />
-        <activity android:name=".Activitys.LoginActivity">
+        <activity android:name=".activitys.OficinaActivity" />
+        <activity android:name=".activitys.PlantaActivity" />
+        <activity android:name=".activitys.EdificioActivity" />
+        <activity android:name=".activitys.PlazaActivity" />
+        <activity android:name=".activitys.EmpresaActivity" />
+        <activity android:name=".activitys.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activitys.InfoActivity" />
-        <activity android:name=".Activitys.MainActivity" />
+        <activity android:name=".activitys.InfoActivity" />
+        <activity android:name=".activitys.MainActivity" />
     </application>
 
 </manifest>

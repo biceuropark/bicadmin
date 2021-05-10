@@ -1,4 +1,4 @@
-package com.example.bicpark.Activitys;
+package com.example.bicpark.activitys;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -148,6 +148,9 @@ public class OficinaActivity extends AppCompatActivity {
                 //Le asigno el adapter a la lista de las oficinas
                 ArrayAdapter<Empresa> arrayAdapter = new ArrayAdapter<>(OficinaActivity.this, android.R.layout.simple_spinner_item, empresas);
                 arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                Empresa empresa1 = new Empresa();
+                empresa1.setNombre("Vacío");
+                empresas.add(0, empresa1);
                 ofiempresa.setAdapter(arrayAdapter);
                 ofiempresa.setTitle("Empresas");
             }

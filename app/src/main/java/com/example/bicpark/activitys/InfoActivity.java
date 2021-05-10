@@ -1,4 +1,4 @@
-package com.example.bicpark.Activitys;
+package com.example.bicpark.activitys;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

@@ -18,8 +18,11 @@ import com.example.bicpark.R;
 
 import com.example.bicpark.model.Oficina;
 
+import com.example.bicpark.model.Plaza;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class AdapterEdificio extends RecyclerView.Adapter<AdapterEdificio.AdapterViewHolder> {
@@ -49,8 +52,8 @@ public class AdapterEdificio extends RecyclerView.Adapter<AdapterEdificio.Adapte
     @Override
     public int getItemCount() {
         return oficinas.size();
-    }
 
+    }
 
 
     public class AdapterViewHolder extends RecyclerView.ViewHolder {
@@ -80,7 +83,6 @@ public class AdapterEdificio extends RecyclerView.Adapter<AdapterEdificio.Adapte
                     listener.onClick(oficina);
                 }
             });
-
         }
 
 

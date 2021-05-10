@@ -1,4 +1,4 @@
-package com.example.bicpark.Activitys;
+package com.example.bicpark.activitys;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,21 +46,21 @@ public class EdificioActivity extends AppCompatActivity {
         planta0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                enviardatos("Oficina 0");
+                enviardatos("Planta 0");
                 finish();
             }
         });
         planta1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                enviardatos("Oficina 1");
+                enviardatos("Planta 1");
                 finish();
             }
         });
         planta2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                enviardatos("Oficina 2");
+                enviardatos("Planta 2");
                 finish();
             }
         });
