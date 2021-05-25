@@ -157,39 +157,6 @@ public class PlantaActivity extends AppCompatActivity {
         }
     }
 
-    @SuppressLint("RestrictedApi")
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.planta_menu, menu);
-        if(menu instanceof MenuBuilder){
-            MenuBuilder m = (MenuBuilder) menu;
-            m.setOptionalIconsVisible(true);
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.menupl_camara :
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE);
-                break;
-            case R.id.menupl_volver:
-                Intent volver = new Intent(PlantaActivity.this, EdificioActivity.class);
-                startActivity(volver);
-                finish();
-                break;
-            case R.id.menupl_add:
-                enviarkey();
-                finish();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == PICK_IMAGE && resultCode == RESULT_OK) {

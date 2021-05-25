@@ -32,7 +32,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.bicpark.R;
-import com.example.bicpark.filtros.Filtros;
+import com.example.bicpark.Servicios.Descarga;
+import com.example.bicpark.Servicios.Filtros;
 import com.example.bicpark.model.Empresa;
 import com.example.bicpark.model.Plaza;
 import com.example.bicpark.recycler.AdapterPlaza;
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView bicgif;
 
     private Filtros filtros;
+    private Descarga descarga;
     private String empresa_f;
     private String estado_f;
     private String tipo_f;
@@ -100,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
         tipo_f = SearchTipo.getSelectedItem().toString();
         //Llamada a filtros
         filtros = new Filtros();
+        //Llamada Descarga
+        descarga = new Descarga();
 
         //Editext con observable para buscar el numero
         SearchNumber.addTextChangedListener(new TextWatcher() {
@@ -416,12 +420,12 @@ public class MainActivity extends AppCompatActivity {
                 requestPermissions(permisos, PERMISO_STORAGE);
             }else{
                 //Permiso otorgado, comenzamos descarga
-                descarga();
+                descarga.descargdoc(MainActivity.this);
             }
         }
         else {
             //Si el SO es menor que marshmallow, llevamos a cabo la descarga
-            descarga();
+            descarga.descargdoc(MainActivity.this);
         }
     }
 
@@ -431,7 +435,7 @@ public class MainActivity extends AppCompatActivity {
             case PERMISO_STORAGE: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                     //Permiso otorgado desde el pop-up
-                    descarga();
+                    descarga.descargdoc(MainActivity.this);
                 }
                 else {
                     //Permiso denegado desde el pop-up
@@ -441,9 +445,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void descarga(){
+    /*private void descarga(){
         //Url del archivo
-        String url = "https://firebasestorage.googleapis.com/v0/b/biceuropark-2a103.appspot.com/o/PDF%2FAversipuedo.pdf?alt=media&token=61d1c0d1-76c4-4d59-8b07-a3a5442864c9";
+        String url = "https://firebasestorage.googleapis.com/v0/b/biceuropark-2a103.appspot.com/o/PDF%2Fsolicitud.pdf?alt=media&token=c1c6908c-dc2e-4e25-99c2-8ab22704af40";
         //Creamos una petición de descarga
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
         //Permitimos los tipos de conexión para descargar archivos
@@ -458,7 +462,7 @@ public class MainActivity extends AppCompatActivity {
         //Obtenemos el servicio de descarga y el archivo en cola
         DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
         manager.enqueue(request);
-    }
+    }*/
 
     //LLamada al método BackPressed cuando se pulsa el botón atrás
     @Override

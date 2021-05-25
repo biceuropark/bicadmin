@@ -30,6 +30,7 @@
         <item name="Izquierda">Izquierda</item>
         <item name="M">M</item>
         <item name="A">A</item>
+        <item name="Nave">Nave</item>
     </string-array>
 
 </resources>

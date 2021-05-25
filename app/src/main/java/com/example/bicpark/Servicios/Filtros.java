@@ -1,6 +1,4 @@
-package com.example.bicpark.filtros;
-
-import android.widget.Adapter;
+package com.example.bicpark.Servicios;
 
 import com.example.bicpark.model.Plaza;
 import com.example.bicpark.recycler.AdapterPlaza;
