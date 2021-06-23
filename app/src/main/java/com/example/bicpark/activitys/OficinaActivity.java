@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.UUID;
 
 
-
 public class OficinaActivity extends AppCompatActivity {
 
     private TextInputEditText ofinumero;
@@ -60,9 +59,9 @@ public class OficinaActivity extends AppCompatActivity {
         ofiborrar = findViewById(R.id.ofi_borrar);
         ofiiden = findViewById(R.id.ofi_iden);
 
-        if(takeofi == null){
+        if (takeofi == null) {
             ofiborrar.setEnabled(false);
-        }else if(takeofi != null){
+        } else if (takeofi != null) {
             ofinumero.setText(String.valueOf(takeofi.getNumero()));
             ofiestado.setSelection(obtenerPosicionItem(ofiestado, takeofi.getEstado()));
             ofiempresa.setSelection(obtenerPosicionItem(ofiempresa, takeofi.getEmpresa()));
@@ -75,7 +74,6 @@ public class OficinaActivity extends AppCompatActivity {
                 AlertaBorrar(view);
             }
         });
-
 
 
         ofiguardar.setOnClickListener(new View.OnClickListener() {
@@ -94,16 +92,16 @@ public class OficinaActivity extends AppCompatActivity {
         });
     }
 
-    private void guardaroficina(View view){
+    private void guardaroficina(View view) {
         String num = ofinumero.getText().toString().trim();
         String emp = ofiempresa.getSelectedItem().toString();
         String estado = ofiestado.getSelectedItem().toString();
         String identificador = ofiiden.getSelectedItem().toString();
-        if(num.isEmpty()){
+        if (num.isEmpty()) {
             Snackbar.make(view, "Rellena los campos", Snackbar.LENGTH_LONG).show();
             return;
         }
-        if(takeofi == null){
+        if (takeofi == null) {
             Oficina oficina = new Oficina();
             oficina.setUid(UUID.randomUUID().toString());
             oficina.setEmpresa(emp);
@@ -111,7 +109,7 @@ public class OficinaActivity extends AppCompatActivity {
             oficina.setEstado(estado);
             oficina.setIdentificador(identificador);
             databaseReference.child("Edificio").child(key).child(oficina.getUid()).setValue(oficina);
-        }else if(takeofi != null){
+        } else if (takeofi != null) {
             Oficina oficina = new Oficina();
             oficina.setUid(takeofi.getUid());
             oficina.setEmpresa(emp);
@@ -161,7 +159,7 @@ public class OficinaActivity extends AppCompatActivity {
         });
     }
 
-    private void obtenerintencion(){
+    private void obtenerintencion() {
         Intent getkey = getIntent();
         Bundle bundlekey = getkey.getExtras();
         key = bundlekey.getString("key");
@@ -170,7 +168,8 @@ public class OficinaActivity extends AppCompatActivity {
         Bundle bundleofi = getofi.getExtras();
         takeofi = (Oficina) bundleofi.getSerializable("exofi");
     }
-    private void enviarkey(){
+
+    private void enviarkey() {
         Intent intent = new Intent(OficinaActivity.this, PlantaActivity.class);
         intent.putExtra("key", key);
         setResult(RESULT_OK, intent);
@@ -187,7 +186,7 @@ public class OficinaActivity extends AppCompatActivity {
         return posicion;
     }
 
-    private void limpiaredit(){
+    private void limpiaredit() {
         ofinumero.setText("");
     }
 

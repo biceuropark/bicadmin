@@ -38,6 +38,8 @@ import com.example.bicpark.model.Empresa;
 import com.example.bicpark.model.Plaza;
 import com.example.bicpark.recycler.AdapterPlaza;
 import com.example.bicpark.recycler.OnPlazaClickListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -45,7 +47,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -97,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         cargardatos();
         cargarEmpresas();
 
+
         //Guardar selección del spinner de estados
         estado_f = SearchEstado.getSelectedItem().toString();
         tipo_f = SearchTipo.getSelectedItem().toString();
@@ -129,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 tipo_f = SearchTipo.getSelectedItem().toString();
                 filtrado();
+
             }
 
             @Override
@@ -227,8 +234,8 @@ public class MainActivity extends AppCompatActivity {
         //Filtrar SOlO EMPrESA
         else if (listener == "" && estado_f == "Todos" && empresa_f != "Todas" && tipo_f == "Todos") {
             filtros.filtrarempresa(empresa_f, plazas, adapterPlaza);
-        //Filtrar SOLO TIPO
-        } else if(listener == "" && estado_f == "Todos" && empresa_f == "Todas" && tipo_f != "Todos"){
+            //Filtrar SOLO TIPO
+        } else if (listener == "" && estado_f == "Todos" && empresa_f == "Todas" && tipo_f != "Todos") {
             filtros.filtrartipo(tipo_f, plazas, adapterPlaza);
 
         }
@@ -245,32 +252,32 @@ public class MainActivity extends AppCompatActivity {
             filtros.filtrarestadoempresa(estado_f, empresa_f, plazas, adapterPlaza);
         }
         //Filtrar TIPO Y NUMERO
-        else if(listener != "" && estado_f == "Todos" && empresa_f == "Todas" && tipo_f != "Todos"){
+        else if (listener != "" && estado_f == "Todos" && empresa_f == "Todas" && tipo_f != "Todos") {
             filtros.filtrartiponumero(listener, tipo_f, plazas, adapterPlaza);
         }
         //Filtrar TIPO Y ESTADO
-        else if(listener == "" && estado_f != "Todos" && empresa_f == "Todas" && tipo_f != "Todos"){
+        else if (listener == "" && estado_f != "Todos" && empresa_f == "Todas" && tipo_f != "Todos") {
             filtros.filtrartipoestado(tipo_f, estado_f, plazas, adapterPlaza);
         }
         //FILTRAR TIPO Y EMPRESA
-        else if(listener == "" && estado_f == "Todos" && empresa_f != "Todas" && tipo_f != "Todos"){
+        else if (listener == "" && estado_f == "Todos" && empresa_f != "Todas" && tipo_f != "Todos") {
             filtros.filtrartipoempresa(tipo_f, empresa_f, plazas, adapterPlaza);
         }
 
         //Filtrar NUMERO TIPO Y EMPrESA
-        else if(listener != "" && estado_f == "Todos" && empresa_f != "Todas" && tipo_f != "Todos"){
+        else if (listener != "" && estado_f == "Todos" && empresa_f != "Todas" && tipo_f != "Todos") {
             filtros.filtrarnumerotipoempresa(listener, tipo_f, empresa_f, plazas, adapterPlaza);
         }
         //Filtrar TIPO emPresa y ESTADO
-        else if(listener == "" && estado_f != "Todos" && empresa_f != "Todas" && tipo_f != "Todos"){
+        else if (listener == "" && estado_f != "Todos" && empresa_f != "Todas" && tipo_f != "Todos") {
             filtros.filtrartipoempresaestado(tipo_f, empresa_f, estado_f, plazas, adapterPlaza);
         }
         //Filtrar ESTADO tiPO Y NUMERO
-        else if(listener != "" && estado_f != "Todos" && empresa_f == "Todas" && tipo_f != "Todos"){
+        else if (listener != "" && estado_f != "Todos" && empresa_f == "Todas" && tipo_f != "Todos") {
             filtros.filtrarnumerotipoestado(listener, tipo_f, estado_f, plazas, adapterPlaza);
         }
         //Filtrar NUMERO, EMPRESA Y ESTADO
-        else if(listener != "" && estado_f != "Todos" && empresa_f != "Todas" && tipo_f == "Todos"){
+        else if (listener != "" && estado_f != "Todos" && empresa_f != "Todas" && tipo_f == "Todos") {
             filtros.filtrarnumeroempresaestado(listener, estado_f, empresa_f, plazas, adapterPlaza);
         }
         //filtrar ALL
@@ -304,6 +311,7 @@ public class MainActivity extends AppCompatActivity {
         fDatabase = FirebaseDatabase.getInstance();
         databaseReference = fDatabase.getReference();
     }
+
     //Enlazar objetos de la interfaz
     private void ViewInits() {
         SearchNumber = findViewById(R.id.main_searchnumber);
@@ -325,8 +333,9 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, spinnerArray);
         SearchEstado.setAdapter(spinnerAdapter);
     }
+
     //Construcción spinner personalizado tipo
-    private void construirspinnertipo(){
+    private void construirspinnertipo() {
         List<String> spinnerArray = new ArrayList<>();
         spinnerArray.add("Todos");
         spinnerArray.add("Techada");
@@ -381,6 +390,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
     //Método para darle funciones al menu y darle navegación a la aplicación
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -410,20 +420,19 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void checkearpermisos(){
+    private void checkearpermisos() {
         //Si el SO es marshmallow o superior, manejamos el permiso
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
                 //Permiso denegado, solicitamos
                 String[] permisos = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
                 //mostramos pop-up para otorgar el permiso
                 requestPermissions(permisos, PERMISO_STORAGE);
-            }else{
+            } else {
                 //Permiso otorgado, comenzamos descarga
                 descarga.descargdoc(MainActivity.this);
             }
-        }
-        else {
+        } else {
             //Si el SO es menor que marshmallow, llevamos a cabo la descarga
             descarga.descargdoc(MainActivity.this);
         }
@@ -431,13 +440,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode){
+        switch (requestCode) {
             case PERMISO_STORAGE: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //Permiso otorgado desde el pop-up
                     descarga.descargdoc(MainActivity.this);
-                }
-                else {
+                } else {
                     //Permiso denegado desde el pop-up
                     Toast.makeText(this, "Permiso denegado", Toast.LENGTH_LONG).show();
                 }
@@ -445,24 +453,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*private void descarga(){
-        //Url del archivo
-        String url = "https://firebasestorage.googleapis.com/v0/b/biceuropark-2a103.appspot.com/o/PDF%2Fsolicitud.pdf?alt=media&token=c1c6908c-dc2e-4e25-99c2-8ab22704af40";
-        //Creamos una petición de descarga
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-        //Permitimos los tipos de conexión para descargar archivos
-        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
-        //Titulo de la notificación de descarga
-        request.setTitle(""+System.currentTimeMillis()+".pdf");
-        //Descripción de la notificación de descarga
-        request.setDescription("Descargando archivo...");
-        request.allowScanningByMediaScanner();
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, ""+System.currentTimeMillis()+".pdf");//Guardado del archivo en carpeta descargas y nombre con el tiempo del dispositivo
-        //Obtenemos el servicio de descarga y el archivo en cola
-        DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-        manager.enqueue(request);
-    }*/
 
     //LLamada al método BackPressed cuando se pulsa el botón atrás
     @Override

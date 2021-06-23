@@ -58,7 +58,8 @@ public class AdapterEmpresa extends RecyclerView.Adapter<AdapterEmpresa.AdapterV
             delete = itemView.findViewById(R.id.rve_icondelete);
 
         }
-        public void bind(Empresa item){
+
+        public void bind(Empresa item) {
             nombre.setText(item.getNombre());
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -66,7 +67,6 @@ public class AdapterEmpresa extends RecyclerView.Adapter<AdapterEmpresa.AdapterV
                     listener.onClick(item);
                 }
             });
-
 
 
         }

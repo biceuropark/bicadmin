@@ -27,6 +27,7 @@
         </activity>
         <activity android:name=".activitys.InfoActivity" />
         <activity android:name=".activitys.MainActivity" />
+
     </application>
 
 </manifest>
